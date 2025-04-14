@@ -1,6 +1,5 @@
 *.o
 
 philo
-philosophers
 
 *.nfs

@@ -6,22 +6,85 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:52:26 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/14 00:30:25 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/14 19:43:12 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-//                                            ./philo 3 100 100 100 [5]
+static void	init_environment(char **argv, t_env *env)
+{
+	int	i;
 
-int	validate_input(int argc, char **argv)
+	i = 0;
+	env->philo_amount = ft_atoi(argv[1]);
+	env->time_to_die = ft_atoi(argv[2]);
+	env->time_to_eat = ft_atoi(argv[3]);
+	env->time_to_sleep = ft_atoi(argv[4]);
+	env->times_must_eat = 0;
+	if (argv[5])
+		env->times_must_eat = ft_atoi(argv[5]);
+	env->start_time = get_current_time();
+	env->end_cycle = false;
+	pthread_mutex_init(&env->freeze_env, NULL);
+	pthread_mutex_init(&env->freeze_env, NULL);
+	printf("DEBUG:  parsed Values: philo_amount: %d, time_to_die: %ld,
+		time_to_eat: %ld, time_to_sleep: %ld\n", env->philo_amount, env->time_to_die, env->time_to_eat, env->time_to_sleep);  //testeee
+	if (argv[5])
+		printf("DEBUG:  times_must_eat: %d\n", env->times_must_eat);   //testeeee
+}
+
+static void	init_forks(t_env *env)
+{
+	int	i;
+
+	i = 0;
+	env->forks = malloc(sizeof(t_fork) * env->philo_amount);
+	if (!env->forks)
+		printf("malloc fail");
+	while(i < (env->philo_amount))
+	{
+		pthread_mutex_init(&env->forks[i].fork, NULL);
+		env->forks[i].fork_id = i + 1;
+		i++;
+	}
+}
+
+static void	init_philos(t_env *env)
+{
+	int	i;
+
+	i = 0;
+	env->philos = malloc(sizeof(t_philo) * env->philo_amount);
+	if (!env->philos)
+		printf("aaaaaaaaaaaa");
+	while(i < (env->philo_amount))
+	{
+		env->philos[i].id = i + 1;
+		env->philos[i].meals_count = 0;
+		env->philos[i].is_full = false;
+		env->philos[i].last_meal_time = env->start_time;
+		env->philos[i].r_fork = assign_forks(env, 'r');
+		env->philos[i].l_fork = assign_forks(env, 'l');
+		env->philos[i].environment = env;
+	}
+}
+
+void	init_all(char **argv, t_env *env)
+{
+	init_environment(argv, env);
+	init_forks(env);	
+	init_philos(env);
+}
+
+bool	validate_input(int argc, char **argv)
 {
 	int	i;
 
 	if (argc < 5 || argc > 6)
 	{
 		printf(" error :(( expected 5 or 6 arguments.\n");
-		return (0);
+		return (false);
 	}
 	i = 1;
 	while (argv[i] != NULL)
@@ -33,5 +96,5 @@ int	validate_input(int argc, char **argv)
 		}
 		i++;
 	}
-	return (1);
+	return (true);
 }

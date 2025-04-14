@@ -6,11 +6,31 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:46:28 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/14 00:29:33 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/14 19:41:07 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+t_fork	*assign_forks(t_env *env, char side)
+{
+	int	mango;
+
+	mango = 0;
+	if (side == 'r')
+		mango = env->philos->id;
+	if (side == 'l')
+		mango = env->philos->id % env->philo_amount;
+	return (&env->forks[mango]);
+}
+
+long	get_current_time(void)
+{
+	struct timeval	time;
+
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}
 
 static int	ft_isdigit(int c)
 {
@@ -48,8 +68,8 @@ int	is_valid_number(char *arg)
 	int	i;
 
 	i = 0;
-	if (!arg || !arg[0])
-		return (0);
+	// if (!arg || !arg[0])  //apagar**
+	// 	return (0);
 	while (arg[i])
 	{
 		if (!ft_isdigit(arg[i]))

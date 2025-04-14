@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:22:33 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/14 00:31:55 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/14 19:42:21 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,33 +32,38 @@ typedef struct s_fork
 typedef struct s_philo
 {
 	int			id;
-	long		meals_count;
+	int			meals_count;
 	bool		is_full;
-	long		last_meal;
+	long		last_meal_time;
 	t_fork		*l_fork;
 	t_fork		*r_fork;
-	pthread_t	thread_t;
+	pthread_t	thread_id;
 	t_env		*environment;
 }	t_philo;
 
 struct s_env
 {
-	long	philo_amount;
-	long	die_time;
-	long	eat_time;
-	long	sleep_time;
-	long	max_meals;
-	long	start_cycle;
-	bool	end_cycle;
-	t_fork	*forks;
-	t_philo	*philos;
+	int				philo_amount;
+	long			time_to_die;
+	long			time_to_eat;
+	long			time_to_sleep;
+	int				times_must_eat;
+	long			start_time;
+	bool			end_cycle;
+	pthread_mutex_t	freeze_to_print; //obs
+	pthread_mutex_t	freeze_env; //obs
+	t_fork			*forks;
+	t_philo			*philos;
 };
 
 /*-----PARSER-----*/
-int	validate_input(int argc, char **argv);
+bool	validate_input(int argc, char **argv);
+void	init_all(char **argv, t_env *env);
 
 /*-----UTILS-----*/
-int	ft_atoi(char *str);
-int	is_valid_number(char *arg);
+int		ft_atoi(char *str);
+int		is_valid_number(char *arg);
+long	get_current_time(void);
+t_fork	*assign_forks(t_env *env, char side);
 
 #endif

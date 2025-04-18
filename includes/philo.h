@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:22:33 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/14 19:42:21 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/18 15:46:29 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,17 @@ struct s_env
 bool	validate_input(int argc, char **argv);
 void	init_all(char **argv, t_env *env);
 
+/*-----THREADS-----*/
+void start_cycle(t_env *env);
+
 /*-----UTILS-----*/
+t_fork	*assign_forks(t_env *env, char side);
+long	get_current_time(void);
 int		ft_atoi(char *str);
 int		is_valid_number(char *arg);
-long	get_current_time(void);
-t_fork	*assign_forks(t_env *env, char side);
+
+/*-----CLEAN-----*/
+void	all_clean(t_env *env);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:52:26 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/14 19:43:12 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/18 14:40:29 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,13 @@ static void	init_environment(char **argv, t_env *env)
 		env->times_must_eat = ft_atoi(argv[5]);
 	env->start_time = get_current_time();
 	env->end_cycle = false;
+	// pthread_mutex_init(&env->freeze_env, NULL);
 	pthread_mutex_init(&env->freeze_env, NULL);
-	pthread_mutex_init(&env->freeze_env, NULL);
-	printf("DEBUG:  parsed Values: philo_amount: %d, time_to_die: %ld,
-		time_to_eat: %ld, time_to_sleep: %ld\n", env->philo_amount, env->time_to_die, env->time_to_eat, env->time_to_sleep);  //testeee
+	printf("DEBUG: parsed Values: philo_amount: %d, time_to_die: %ld, "
+		"time_to_eat: %ld, time_to_sleep: %ld\n",env->philo_amount, env->time_to_die, env->time_to_eat, env->time_to_sleep);
 	if (argv[5])
 		printf("DEBUG:  times_must_eat: %d\n", env->times_must_eat);   //testeeee
+	printf("DEBUG: saiu init_env\n");  //debug
 }
 
 static void	init_forks(t_env *env)
@@ -41,7 +42,7 @@ static void	init_forks(t_env *env)
 	i = 0;
 	env->forks = malloc(sizeof(t_fork) * env->philo_amount);
 	if (!env->forks)
-		printf("malloc fail");
+		write(1, "Malloc fail", 11);
 	while(i < (env->philo_amount))
 	{
 		pthread_mutex_init(&env->forks[i].fork, NULL);
@@ -57,7 +58,7 @@ static void	init_philos(t_env *env)
 	i = 0;
 	env->philos = malloc(sizeof(t_philo) * env->philo_amount);
 	if (!env->philos)
-		printf("aaaaaaaaaaaa");
+		write(1, "Malloc fail", 11);
 	while(i < (env->philo_amount))
 	{
 		env->philos[i].id = i + 1;
@@ -67,14 +68,21 @@ static void	init_philos(t_env *env)
 		env->philos[i].r_fork = assign_forks(env, 'r');
 		env->philos[i].l_fork = assign_forks(env, 'l');
 		env->philos[i].environment = env;
+		i++;
 	}
 }
 
 void	init_all(char **argv, t_env *env)
 {
+	if (!env)
+		printf("visshhhh\n");
 	init_environment(argv, env);
-	init_forks(env);	
+	printf("DEBUG: saiu init_env, vai chamar init forks\n");
+	init_forks(env);  //looooppppp
+	printf("DEBUG: saiu init_forks, vai chamar init_philos\n");
 	init_philos(env);
+	printf("DEBUG: saiu init_forks, vai chamar init_philos\n");
+	printf("DEBUG: boaaaaaa terminou init_all\n");
 }
 
 bool	validate_input(int argc, char **argv)

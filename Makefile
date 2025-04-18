@@ -6,14 +6,14 @@ CFLAGS = -Wall -Werror -Wextra -pthread
 
 # source files
 SRCS = 	src/main.c src/utils.c src/parser.c \
-		#  src/utils_parsing.c src/threads.c src/actions.c \
+			src/threads.c #src/actions.c \
 
 # object directory
 OBJ_DIR = objects
 
 # object files
 OBJS = $(OBJ_DIR)/main.o $(OBJ_DIR)/parser.o $(OBJ_DIR)/utils.o \
-		# $(OBJ_DIR)/utils_parsing.o $(OBJ_DIR)/threads.o $(OBJ_DIR)/actions.o \
+		$(OBJ_DIR)/clean.o $(OBJ_DIR)/threads.o \
 
 all : $(NAME)
 
@@ -30,8 +30,11 @@ $(OBJ_DIR)/parser.o: src/parser.c | $(OBJ_DIR)
 $(OBJ_DIR)/utils.o: src/utils.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c src/utils.c -o $(OBJ_DIR)/utils.o
 
-# $(OBJ_DIR)/threads.o: src/threads.c | $(OBJ_DIR)
-# 	$(CC) $(CFLAGS) -c src/threads.c -o $(OBJ_DIR)/threads.o
+$(OBJ_DIR)/clean.o: src/clean.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c src/clean.c -o $(OBJ_DIR)/clean.o
+
+$(OBJ_DIR)/threads.o: src/threads.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c src/threads.c -o $(OBJ_DIR)/threads.o
 
 # $(OBJ_DIR)/utils_parsing.o: src/utils_parsing.c | $(OBJ_DIR)
 # 	$(CC) $(CFLAGS) -c src/utils_parsing.c -o $(OBJ_DIR)/utils_parsing.o

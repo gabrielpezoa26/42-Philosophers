@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/16 16:49:56 by gcesar-n          #+#    #+#             */
+/*   Created: 2025/04/16 19:39:57 by gcesar-n          #+#    #+#             */
 /*   Updated: 2025/04/18 15:46:29 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-int	main(int argc, char **argv)
+void	all_clean(t_env *env)
 {
-	t_env	env;
-
-	if (!validate_input(argc, argv))
-		return (1);
-	init_all(argv, &env);
-	start_cycle(&env);
-	all_clean(&env);
-	return (0);
+	if (env->philos)
+		free(env->philos);
+	if (env->forks)
+		free(env->forks);
+	printf("DEBUG: freeeeee\n");  //apagar
 }

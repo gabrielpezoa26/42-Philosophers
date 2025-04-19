@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:46:28 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/14 19:41:07 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/19 16:19:15 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 t_fork	*assign_forks(t_env *env, char side)
 {
-	int	mango;
+	int	id;
 
-	mango = 0;
+	id = 0;
 	if (side == 'r')
-		mango = env->philos->id;
+		id = env->philos->id;
 	if (side == 'l')
-		mango = env->philos->id % env->philo_amount;
-	return (&env->forks[mango]);
+		id = env->philos->id % env->philo_amount;
+	return (&env->forks[id]);
 }
 
 long	get_current_time(void)
@@ -68,8 +68,8 @@ int	is_valid_number(char *arg)
 	int	i;
 
 	i = 0;
-	// if (!arg || !arg[0])  //apagar**
-	// 	return (0);
+	if (!arg || !arg[0])
+		return (0);
 	while (arg[i])
 	{
 		if (!ft_isdigit(arg[i]))

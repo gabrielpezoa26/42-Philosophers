@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:22:33 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/18 15:46:29 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/19 20:24:24 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <unistd.h>
 # include <stdbool.h>
 # include <stdio.h>
-# include <limits.h>
 # include <stdlib.h>
 # include <sys/time.h>
 
@@ -50,27 +49,33 @@ struct s_env
 	int				times_must_eat;
 	long			start_time;
 	bool			end_cycle;
-	pthread_mutex_t	freeze_to_print; //obs
-	pthread_mutex_t	freeze_env; //obs
+	pthread_mutex_t	freeze_to_print;
+	pthread_mutex_t	freeze_env;
 	t_fork			*forks;
 	t_philo			*philos;
+	pthread_t		monitor;
+	pthread_mutex_t	monitor_mtx;
 };
 
 /*-----PARSER-----*/
 bool	validate_input(int argc, char **argv);
 void	init_all(char **argv, t_env *env);
 
-/*-----THREADS-----*/
-void start_cycle(t_env *env);
+/*-----ACTIONS-----*/
 
-/*-----UTILS-----*/
+/*-----THREADS-----*/
+void	start_cycle(t_env *env);
+
+/*-----UTILS_THREADS-----*/
+// void	ft_sleep(long time, t_env *env)
+
+/*-----UTILS_PARSER-----*/
 t_fork	*assign_forks(t_env *env, char side);
 long	get_current_time(void);
 int		ft_atoi(char *str);
 int		is_valid_number(char *arg);
 
 /*-----CLEAN-----*/
-void	all_clean(t_env *env);
-
+void	free_structs(t_env *env);
 
 #endif

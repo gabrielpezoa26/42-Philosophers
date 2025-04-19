@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:49:56 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/18 15:46:29 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/19 20:23:18 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,6 @@ int	main(int argc, char **argv)
 		return (1);
 	init_all(argv, &env);
 	start_cycle(&env);
-	all_clean(&env);
+	free_structs(&env);
 	return (0);
 }

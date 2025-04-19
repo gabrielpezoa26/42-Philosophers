@@ -40,3 +40,10 @@ pthread_join(thread, NULL);
 	Parameter	Description:
 	- thread:	The thread to wait for
 	- NULL:	You can pass a pointer to receive the thread’s return value (or NULL if unused)
+
+
+
+
+nao esquecer:
+
+- adicionar cores

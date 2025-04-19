@@ -1,22 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean.c                                            :+:      :+:    :+:   */
+/*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcesar-n <gcesar-n>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/16 19:39:57 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/19 19:22:17 by gcesar-n         ###   ########.fr       */
+/*   Created: 2025/02/16 16:49:56 by gcesar-n          #+#    #+#             */
+/*   Updated: 2025/04/19 20:17:02 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	free_structs(t_env *env)
-{
-	if (env->philos)
-		free(env->philos);
-	if (env->forks)
-		free(env->forks);
-	printf("DEBUG: freeeeeeeeeee\n");
-}
+void	eating(void);
+void	sleeping(void);
+void	thinking(void);

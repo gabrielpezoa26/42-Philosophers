@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:22:33 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/21 14:38:19 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/21 16:42:41 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void thinking(void);
 void	start_cycle(t_env *env);
 
 /*-----UTILS_THREADS-----*/
-// void	ft_sleep(long time, t_env *env)
+// void	ft_sleep(long time, t_env *t_env);
 
 /*-----UTILS_PARSER-----*/
 t_fork	*assign_forks(t_env *env, char side);

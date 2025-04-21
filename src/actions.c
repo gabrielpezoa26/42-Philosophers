@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:49:56 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/21 14:46:20 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/21 16:43:28 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	eating(void)
 {
 	printf("is eating\n");
-	usleep(1000);
+	usleep(100000);
 }
 
 // void eating(void)
@@ -31,11 +31,11 @@ void	eating(void)
 void	sleeping(void)
 {
 	printf("is sleeping\n");
-	usleep(200);
+	usleep(100000); //debug
 }
 
 void	thinking(void)
 {
 	printf("is thinking\n");
-	usleep(600);
+	usleep(100000); //debug
 }

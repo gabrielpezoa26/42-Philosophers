@@ -6,21 +6,30 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:49:56 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/21 14:31:20 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/21 17:34:56 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-// static void	*monitor_routine(t_env *env)
-// {
-// 	// if (env->times_must_eat == )
-// 	// verifica se algum philo morreu
-// }
-
-static void	*routine(void *context)
+static void	*monitor_routine(void *arg)
 {
-	(void)context;
+	// verifica se alguem morreu ou meals_eaten == times_must_eat
+	t_env	*env;
+	int		counter_full_philos;
+	
+	while(!(env->end_cycle))
+	{
+		
+	}
+
+}
+
+static void	*routine(void *arg)
+{
+	t_env *env;
+
+	env = (void *)arg;
 	eating();
 	sleeping();
 	thinking();
@@ -33,7 +42,7 @@ void	start_cycle(t_env *env)
 	int	i;
 
 	i = 0;
-	// pthread_create(&env->monitor, NULL, monitor_routine, NULL);
+	// pthread_create(&env->monitor, NULL, monitor_routine,  env);
 	while (i < env->philo_amount)
 	{
 		printf("DEBUG: creating philo: %i\n", i);
@@ -41,7 +50,7 @@ void	start_cycle(t_env *env)
 			&env->philos[i]);
 		i++;
 	}
-	pthread_join(env->monitor, NULL); // unitialised
+	// pthread_join(env->monitor, NULL); // unitialised
 	i = 0;
 	while (i < (env->philo_amount))
 	{

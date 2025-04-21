@@ -6,17 +6,36 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:49:56 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/21 02:57:35 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/21 14:46:20 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	eating(void);
-void	sleeping(void);
-void	thinking(void);
+void	eating(void)
+{
+	printf("is eating\n");
+	usleep(1000);
+}
 
+// void eating(void)
+// {
+// 	t_env *env;
+	
+// 	pthread_mutex_lock();
+// 	printf("%d is eating\n", i);
+// 	env->philos->meals_count++;
+// 	pthread_mutex_unlock();
+// }
 
-/*
-	time_to_think = (time_to_eat + time_to_sleep) / 2
-*/
+void	sleeping(void)
+{
+	printf("is sleeping\n");
+	usleep(200);
+}
+
+void	thinking(void)
+{
+	printf("is thinking\n");
+	usleep(600);
+}

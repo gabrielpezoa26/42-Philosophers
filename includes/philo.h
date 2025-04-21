@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n>                        +#+  +:+       +#+        */
+/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:22:33 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/19 20:24:24 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/21 14:38:19 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ struct s_env
 	long			time_to_die;
 	long			time_to_eat;
 	long			time_to_sleep;
+	long			time_to_think;
 	int				times_must_eat;
 	long			start_time;
 	bool			end_cycle;
@@ -62,6 +63,9 @@ bool	validate_input(int argc, char **argv);
 void	init_all(char **argv, t_env *env);
 
 /*-----ACTIONS-----*/
+void eating(void);
+void sleeping(void);
+void thinking(void);
 
 /*-----THREADS-----*/
 void	start_cycle(t_env *env);

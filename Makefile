@@ -2,8 +2,7 @@ NAME = philo
 
 CC = cc
 
-# CFLAGS = -Wall -Werror -Wextra -pthread
-CFLAGS = -pthread
+CFLAGS = -Wall -Werror -Wextra -pthread
 
 # source files
 SRCS = 	src/main.c src/utils_parser.c src/parser.c \

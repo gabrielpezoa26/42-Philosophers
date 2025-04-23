@@ -6,36 +6,48 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:49:56 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/23 00:26:42 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/23 17:08:16 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-// static void	*monitor_routine(void *arg)
-// {
-// 	// verifica se alguem morreu ou meals_eaten == times_must_eat
-// 	t_env	*env;
-// 	int		counter_full_philos;
+static void	*monitor_routine(void *arg)
+{
+	t_env	*env;
+	int		counter_full_philos;
 	
-// 	while(!(env->end_cycle))
-// 	{
-		
-// 	}
-
-// }
+	env = (t_env *)arg;
+	while(!(env->end_cycle))
+	{
+		counter_full_philos = 0;
+		if (is_philo_dead(env))
+			return (NULL);
+		// if (is_all_philos_full())
+		// 	return (NULL);
+		if (env->meals_count > 0 && counter_full_philos == env->philo_amount)
+		{
+			env->end_cycle = 1;
+			return (NULL);
+		}
+		ft_usleep(1000, env);
+	}
+	return (NULL);
+}
 
 static void	*routine(void *arg)
 {
 	t_env *env;
 
 	env = (void *)arg;
-	printf("pick forks\n");
-	printf("is eatinggg\n");
-	printf("drop forks\n");
-	printf("is sleeping\n");
-	printf("is thinking\n");
-	printf("monitor routineeeee\n");
+	while(!env->end_cycle)
+	{
+		printf("pick forks\n");
+		eating();
+		printf("drop forks\n");
+		sleeping();
+		thinking();
+	}
 	return (NULL);
 }
 
@@ -44,15 +56,15 @@ void	start_cycle(t_env *env)
 	int	i;
 
 	i = 0;
-	// pthread_create(&env->monitor, NULL, monitor_routine,  env);
+	pthread_create(&env->monitor, NULL, monitor_routine,  env);
 	while (i < env->philo_amount)
 	{
-		printf("DEBUG: creating philo: %i\n", i);
+		printf("DEBUG: creating philo: %i\n", i + 1);
 		pthread_create(&env->philos[i].thread_id, NULL, routine,
 			&env->philos[i]);
 		i++;
 	}
-	// pthread_join(env->monitor, NULL); // unitialised
+	pthread_join(env->monitor, NULL); // unitialised
 	i = 0;
 	while (i < (env->philo_amount))
 	{

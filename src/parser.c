@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:52:26 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/22 23:01:22 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/23 17:10:26 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ static void	init_environment(char **argv, t_env *env)
 	env->time_to_eat = ft_atoi(argv[3]);
 	env->time_to_sleep = ft_atoi(argv[4]);
 	env->time_to_think = (env->time_to_eat + env->time_to_sleep) / 2;
-	env->times_must_eat = 0;
+	env->times_must_eat = -1;
 	if (argv[5])
 		env->times_must_eat = ft_atoi(argv[5]);
 	env->start_time = get_current_time_ms();
 	env->end_cycle = false;
-	// pthread_mutex_init(&env->freeze_env, NULL);
-	// pthread_mutex_init(&env->freeze_env, NULL);
+	pthread_mutex_init(&env->freeze_env, NULL);
+	pthread_mutex_init(&env->freeze_env, NULL);
 	printf("DEBUG: parsed Values: philo_amount: %d, time_to_die: %ld, "
 		"time_to_eat: %ld, time_to_sleep: %ld, time_to_think: %ld\n", env->philo_amount, env->time_to_die, env->time_to_eat, env->time_to_sleep, env->time_to_think);
 	if (argv[5]) //debug

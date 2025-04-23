@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:22:33 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/23 00:31:09 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/23 17:08:11 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,13 @@ typedef struct s_philo
 struct s_env
 {
 	int				philo_amount;
+	int				number_philos_full;
 	long			time_to_die;
 	long			time_to_eat;
 	long			time_to_sleep;
 	long			time_to_think;
 	int				times_must_eat;
+	int				meals_count;
 	long			start_time;
 	bool			end_cycle;
 	pthread_mutex_t	freeze_to_print;
@@ -74,6 +76,10 @@ void	start_cycle(t_env *env);
 
 /*-----UTILS_THREADS-----*/
 // void	ft_sleep(long time, t_env *t_env);
+bool	is_philo_dead(t_env *env);
+bool	is_all_philos_full(t_env *t_env);
+void	ft_usleep(uint64_t duration_us, t_env *env);
+long	get_time(t_env *env);
 
 /*-----UTILS_PARSER-----*/
 t_fork	*assign_forks(t_env *env, char side);

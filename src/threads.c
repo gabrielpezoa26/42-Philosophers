@@ -6,34 +6,36 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:49:56 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/21 17:34:56 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/23 00:26:42 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-static void	*monitor_routine(void *arg)
-{
-	// verifica se alguem morreu ou meals_eaten == times_must_eat
-	t_env	*env;
-	int		counter_full_philos;
+// static void	*monitor_routine(void *arg)
+// {
+// 	// verifica se alguem morreu ou meals_eaten == times_must_eat
+// 	t_env	*env;
+// 	int		counter_full_philos;
 	
-	while(!(env->end_cycle))
-	{
+// 	while(!(env->end_cycle))
+// 	{
 		
-	}
+// 	}
 
-}
+// }
 
 static void	*routine(void *arg)
 {
 	t_env *env;
 
 	env = (void *)arg;
-	eating();
-	sleeping();
-	thinking();
-	printf("monitor routine\n");
+	printf("pick forks\n");
+	printf("is eatinggg\n");
+	printf("drop forks\n");
+	printf("is sleeping\n");
+	printf("is thinking\n");
+	printf("monitor routineeeee\n");
 	return (NULL);
 }
 

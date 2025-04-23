@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:22:33 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/21 16:42:41 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/23 00:31:09 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <sys/time.h>
+
+# include <stdint.h>
 
 typedef struct s_env	t_env;
 
@@ -63,9 +65,9 @@ bool	validate_input(int argc, char **argv);
 void	init_all(char **argv, t_env *env);
 
 /*-----ACTIONS-----*/
-void eating(void);
-void sleeping(void);
-void thinking(void);
+void	eating(void);
+void	sleeping(void);
+void	thinking(void);
 
 /*-----THREADS-----*/
 void	start_cycle(t_env *env);
@@ -75,9 +77,12 @@ void	start_cycle(t_env *env);
 
 /*-----UTILS_PARSER-----*/
 t_fork	*assign_forks(t_env *env, char side);
-long	get_current_time(void);
+long	get_current_time_ms(void);
 int		ft_atoi(char *str);
 int		is_valid_number(char *arg);
+
+/*-----PRINT_MSG-----*/
+void	print_message(char *msg);  //n ta sendo usada e cpa nem vai
 
 /*-----CLEAN-----*/
 void	free_structs(t_env *env);

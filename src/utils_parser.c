@@ -6,11 +6,25 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:46:28 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/21 18:20:14 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/23 00:17:29 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
+
+// void	assign_forks(t_philo *philo)
+// {
+// 	if (philo->id % 2 == 0)
+// 	{
+// 		pthread_mutex_lock(&philo->r_fork->fork);
+// 		pthread_mutex_lock(&philo->l_fork->fork);
+// 	}
+// 	else
+// 	{
+// 		pthread_mutex_lock(&philo->l_fork->fork);
+// 		pthread_mutex_lock(&philo->r_fork->fork);
+// 	}
+// }
 
 t_fork	*assign_forks(t_env *env, char side)
 {
@@ -24,15 +38,13 @@ t_fork	*assign_forks(t_env *env, char side)
 	return (&env->forks[id]);
 }
 
-long	get_current_time(void)
+long	get_current_time_ms(void)
 {
 	struct timeval	time;
 
 	gettimeofday(&time, NULL);
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
-
-
 
 static int	ft_isdigit(int c)
 {

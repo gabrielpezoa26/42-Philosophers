@@ -1,41 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   actions.c                                          :+:      :+:    :+:   */
+/*   print_message.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/16 16:49:56 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/23 00:26:37 by gcesar-n         ###   ########.fr       */
+/*   Created: 2025/02/20 12:46:28 by gcesar-n          #+#    #+#             */
+/*   Updated: 2025/04/22 23:09:37 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-void	eating(void)
+static void	ft_print_char(int c)
 {
-	printf("is eating\n");
-	usleep(100000);  //debug
+	write(1, &c, 1);
 }
 
-// void eating(void)
-// {
-// 	t_env *env;
-	
-// 	pthread_mutex_lock();
-// 	printf("%d is eating\n", i);
-// 	env->philos->meals_count++;
-// 	pthread_mutex_unlock();
-// }
-
-void	sleeping(void)
+static void	ft_print_str(char *str)
 {
-	printf("is sleeping\n");
-	usleep(100000); //debug
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		ft_print_char(str[i]);
+		i++;
+	}
 }
 
-void	thinking(void)
+static void	ft_print_nbr(long n)
 {
-	printf("is thinking\n");
-	usleep(100000); //debug
+	if (n >= 10)
+		ft_print_nbr(n / 10);
+	ft_print_char((n % 10) + '0');
+}
+
+void	print_message(char *msg)
+{
+	long	timestamp;
+
+	timestamp = get_current_time_ms();
+	ft_print_nbr(timestamp);
+	ft_print_char(' ');
+	ft_print_str(msg);
+	ft_print_char('\n');
 }

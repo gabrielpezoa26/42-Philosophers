@@ -20,11 +20,22 @@ pthread_join(thread, NULL);=====================================================
 }
 
 
+amanha:
+{
+	arrumar is_philo_dead()
+}
+
+
+
+
+
+
+
+
+
 
 nao esquecer:
 - nomes variaveis
-- norma
-- flags Makefile
 
 
 - routine()

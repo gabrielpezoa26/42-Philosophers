@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:46:28 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/23 20:06:53 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/23 20:14:04 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ bool	is_philo_dead(t_env *env)
 // 	return (false);
 // }
 
-bool	is_all_philos_full(t_env *env)
+bool	is_philos_full(t_env *env)
 {
 	int	i;
 	int	meals;

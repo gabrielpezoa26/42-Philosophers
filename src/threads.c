@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:49:56 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/23 20:06:51 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/23 20:19:07 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ static void	*monitor_routine(void *arg)
 	{
 		if (is_philo_dead(env))
 		{
-			printf("DEBUG: monitor:aaaaaaaaaaaaaaaa\n");
+			printf("DEBUG: monitor: is_philo_dead \n");
 			env->end_cycle = true;
 		}
-		if (is_all_philos_full(env))
+		if (is_philos_full(env))
 		{
-			printf("DEBUG: bbbbbbbbbbbbbbb\n");
+			printf("DEBUG: is_philos_full \n");
 			env->end_cycle = true;
 		}
 	}

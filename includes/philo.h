@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:22:33 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/23 19:02:58 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/23 20:18:57 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	start_cycle(t_env *env);
 /*-----UTILS_THREADS-----*/
 // void	ft_sleep(long time, t_env *t_env);
 bool	is_philo_dead(t_env *env);
-bool	is_all_philos_full(t_env *env);
+bool	is_philos_full(t_env *env);
 long	get_absolute_time(void);
 long	get_time(t_env *env);
 

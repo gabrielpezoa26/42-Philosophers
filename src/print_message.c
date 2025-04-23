@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:46:28 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/22 23:09:37 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/23 18:56:56 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	print_message(char *msg)
 {
 	long	timestamp;
 
-	timestamp = get_current_time_ms();
+	timestamp = get_time();
 	ft_print_nbr(timestamp);
 	ft_print_char(' ');
 	ft_print_str(msg);

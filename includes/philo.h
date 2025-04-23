@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:22:33 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/23 17:08:11 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/23 19:02:58 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ struct s_env
 {
 	int				philo_amount;
 	int				number_philos_full;
-	long			time_to_die;
-	long			time_to_eat;
-	long			time_to_sleep;
-	long			time_to_think;
+	int			time_to_die;
+	int			time_to_eat;
+	int			time_to_sleep;
+	int			time_to_think;
 	int				times_must_eat;
 	int				meals_count;
 	long			start_time;
@@ -77,13 +77,12 @@ void	start_cycle(t_env *env);
 /*-----UTILS_THREADS-----*/
 // void	ft_sleep(long time, t_env *t_env);
 bool	is_philo_dead(t_env *env);
-bool	is_all_philos_full(t_env *t_env);
-void	ft_usleep(uint64_t duration_us, t_env *env);
+bool	is_all_philos_full(t_env *env);
+long	get_absolute_time(void);
 long	get_time(t_env *env);
 
 /*-----UTILS_PARSER-----*/
 t_fork	*assign_forks(t_env *env, char side);
-long	get_current_time_ms(void);
 int		ft_atoi(char *str);
 int		is_valid_number(char *arg);
 

@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:46:28 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/23 00:17:29 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/23 18:59:02 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,6 @@ t_fork	*assign_forks(t_env *env, char side)
 	if (side == 'l')
 		id = env->philos->id % env->philo_amount;
 	return (&env->forks[id]);
-}
-
-long	get_current_time_ms(void)
-{
-	struct timeval	time;
-
-	gettimeofday(&time, NULL);
-	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
 }
 
 static int	ft_isdigit(int c)

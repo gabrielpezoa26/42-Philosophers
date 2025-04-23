@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:46:28 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/23 17:04:44 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/23 20:06:53 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,12 @@ bool	is_philo_dead(t_env *env)
 	i = 0;
 	while (i < env->philo_amount)
 	{
-		pthread_mutex_lock(&env->freeze_to_print);
+		pthread_mutex_lock(&env->freeze_env);
 		if (get_time(env) - env->philos[i].last_meal_time > env->time_to_die)
 		{
 			pthread_mutex_lock(&env->freeze_env);
-			printf("%ld philo %i died\n", get_time(env), i + 1);
+			// printf("%ld philo %i died\n", get_time(env), i + 1);
+			// env->end_cycle = true;
 			pthread_mutex_unlock(&env->freeze_to_print);
 			pthread_mutex_unlock(&env->freeze_env);
 			return (true);
@@ -34,34 +35,60 @@ bool	is_philo_dead(t_env *env)
 	return (false);
 }
 
-// bool	is_all_philos_full(t_env *t_env)
+// bool	is_philo_dead(t_env *env)
 // {
-// 	int	i;
+// 	int		i;
+// 	long	current_time;
+// 	long	time_since_last_meal;
 
-// 	while()
+// 	i = 0;
+// 	while (i < env->philo_amount)
 // 	{
-// 		if (qtde comeram == env->times_must_eat)
+// 		current_time = get_absolute_time();
+// 		time_since_last_meal = current_time - env->philos[i].last_meal_time;
+// 		if (time_since_last_meal > env->time_to_die)
+// 		{
+// 			pthread_mutex_lock(&env->freeze_to_print);
+// 			printf("%ld philo %d died\n", get_time(env), env->philos[i].id);
+// 			pthread_mutex_unlock(&env->freeze_to_print);
+// 			pthread_mutex_lock(&env->monitor_mtx);
+// 			env->end_cycle = true;
+// 			pthread_mutex_unlock(&env->monitor_mtx);
+// 			return (true);
+// 		}
+// 		i++;
 // 	}
+// 	return (false);
 // }
 
-void	ft_usleep(uint64_t duration_us, t_env *env)
+bool	is_all_philos_full(t_env *env)
 {
-	uint64_t	start_time_us;
-	uint64_t	elapsed_time_us;
-	uint64_t	remaining_time_us;
+	int	i;
+	int	meals;
 
-	start_time_us = get_time(env);
-	while (!env->end_cycle)
+	i = 0;
+	if (env->times_must_eat < 0)
+		return (false);
+	while (i < env->philo_amount)
 	{
-		elapsed_time_us = get_time(env) - start_time_us;
-		if (elapsed_time_us >= duration_us)
-			break;
-		remaining_time_us = duration_us - elapsed_time_us;
-		if (remaining_time_us > 2000)
-			usleep(remaining_time_us / 2);
-		else
-			usleep(200);
+		pthread_mutex_lock(&env->freeze_env);
+		meals = env->philos[i].meals_count;
+		pthread_mutex_unlock(&env->freeze_env);
+		if (meals < env->times_must_eat)
+			return (false);
+		i++;
 	}
+	return (true);
+}
+
+long	get_absolute_time(void)
+{
+	struct timeval	time;
+	long	current;
+
+	gettimeofday(&time, NULL);
+	current = time.tv_sec * 1000 + time.tv_usec / 1000;
+	return (current);
 }
 
 long	get_time(t_env *env)
@@ -70,6 +97,6 @@ long	get_time(t_env *env)
 	long current;
 
 	gettimeofday(&time, NULL);
-	current = time.tv_sec * 1000 + time.tv_sec / 1000;
+	current = time.tv_sec * 1000 + time.tv_usec / 1000;
 	return (current - env->start_time);
 }

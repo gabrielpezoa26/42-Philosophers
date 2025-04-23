@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:49:56 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/23 17:08:16 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/23 20:06:51 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,38 +15,39 @@
 static void	*monitor_routine(void *arg)
 {
 	t_env	*env;
-	int		counter_full_philos;
 	
 	env = (t_env *)arg;
 	while(!(env->end_cycle))
 	{
-		counter_full_philos = 0;
 		if (is_philo_dead(env))
-			return (NULL);
-		// if (is_all_philos_full())
-		// 	return (NULL);
-		if (env->meals_count > 0 && counter_full_philos == env->philo_amount)
 		{
-			env->end_cycle = 1;
-			return (NULL);
+			printf("DEBUG: monitor:aaaaaaaaaaaaaaaa\n");
+			env->end_cycle = true;
 		}
-		ft_usleep(1000, env);
+		if (is_all_philos_full(env))
+		{
+			printf("DEBUG: bbbbbbbbbbbbbbb\n");
+			env->end_cycle = true;
+		}
 	}
 	return (NULL);
 }
 
 static void	*routine(void *arg)
 {
-	t_env *env;
+	t_philo	*philo;
 
-	env = (void *)arg;
-	while(!env->end_cycle)
+	philo = (t_philo *)arg;
+	while (!philo->environment->end_cycle)
 	{
-		printf("pick forks\n");
-		eating();
-		printf("drop forks\n");
-		sleeping();
-		thinking();
+		if (philo->environment->philo_amount == 1)
+		{
+			printf("%ld philo %d has taken a fork\n", get_time(philo->environment), philo->id);
+			usleep(philo->environment->time_to_die * 1000);
+			printf("%ld philo %i died\n", get_time(philo->environment), philo->id);
+			philo->environment->end_cycle = true;
+			break ;
+		}
 	}
 	return (NULL);
 }
@@ -55,11 +56,12 @@ void	start_cycle(t_env *env)
 {
 	int	i;
 
+	env->start_time = get_absolute_time();
+	pthread_create(&env->monitor, NULL, monitor_routine, env);
 	i = 0;
-	pthread_create(&env->monitor, NULL, monitor_routine,  env);
-	while (i < env->philo_amount)
+	while (i < (env->philo_amount))
 	{
-		printf("DEBUG: creating philo: %i\n", i + 1);
+		env->philos[i].last_meal_time = env->start_time;
 		pthread_create(&env->philos[i].thread_id, NULL, routine,
 			&env->philos[i]);
 		i++;

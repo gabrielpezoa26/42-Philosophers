@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:49:56 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/24 00:38:52 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/24 01:15:04 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	*routine(void *arg)
 	return (NULL);
 }
 
-void	start_cycle(t_env *env)
+void	launch_cycle(t_env *env)
 {
 	int	i;
 

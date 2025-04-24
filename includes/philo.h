@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:22:33 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/24 00:23:44 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/24 01:23:56 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,11 @@
 # define PHILO_H
 
 # include <pthread.h>
+# include <stdio.h>
 # include <unistd.h>
 # include <stdbool.h>
-# include <stdio.h>
 # include <stdlib.h>
 # include <sys/time.h>
-
-# include <stdint.h>
 
 typedef struct s_env	t_env;
 
@@ -63,24 +61,21 @@ struct s_env
 };
 
 /*-----PARSER-----*/
-bool	validate_input(int argc, char **argv);
+bool	check_args(int argc, char **argv);
 void	init_all(char **argv, t_env *env);
 
-/*-----ACTIONS-----*/
-void	take_forks(t_philo *philo);
-void	drop_forks(t_philo *philo);
+/*-----THREADS-----*/
+void	launch_cycle(t_env *env);
 
+/*-----ACTIONS-----*/
 void	eating(t_philo *philo);
 void	sleeping(t_philo *philo);
 void	thinking(t_philo *philo);
 
-/*-----THREADS-----*/
-void	start_cycle(t_env *env);
-
 /*-----UTILS_THREADS-----*/
-void	handle_single_philo(t_philo *philo);
 bool	is_philo_dead(t_env *env);
 bool	is_philos_full(t_env *env);
+void	handle_single_philo(t_philo *philo);
 long	get_absolute_time(void);
 long	get_time(t_env *env);
 
@@ -88,6 +83,11 @@ long	get_time(t_env *env);
 int		ft_atoi(char *str);
 int		is_valid_number(char *arg);
 int		time_to_think(t_env *env);
+
+/*-----UTILS_ACTIONS-----*/
+void	print_message(t_env *env, int id, char *msg);
+void	take_forks(t_philo *philo);
+void	drop_forks(t_philo *philo);
 
 /*-----CLEAN-----*/
 void	free_structs(t_env *env);

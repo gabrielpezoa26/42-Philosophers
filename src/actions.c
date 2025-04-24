@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:49:56 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/24 01:11:29 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/24 15:30:37 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	eating(t_philo *philo)
 {
 	t_env	*env;
-	long	start;
+	long	start_time;
 
 	env = philo->environment;
 	pthread_mutex_lock(&env->freeze_env);
@@ -27,35 +27,35 @@ void	eating(t_philo *philo)
 	if (env->end_cycle)
 		return ;
 	print_message(env, philo->id, "is eating");
-	start = get_time(env);
-	while (!env->end_cycle && get_time(env) - start < env->time_to_eat)
+	start_time = get_time(env);
+	while (!env->end_cycle && get_time(env) - start_time < env->time_to_eat)
 		usleep(200);
 }
 
 void	sleeping(t_philo *philo)
 {
 	t_env	*env;
-	long	start;
+	long	start_time;
 
 	env = philo->environment;
 	if (env->end_cycle)
 		return ;
 	print_message(env, philo->id, "is sleeping");
-	start = get_time(env);
-	while (!env->end_cycle && get_time(env) - start < env->time_to_sleep)
+	start_time = get_time(env);
+	while (!env->end_cycle && get_time(env) - start_time < env->time_to_sleep)
 		usleep(200);
 }
 
 void	thinking(t_philo *philo)
 {
 	t_env	*env;
-	long	start;
+	long	start_time;
 
 	env = philo->environment;
 	if (env->end_cycle)
 		return ;
 	print_message(env, philo->id, "is thinking");
-	start = get_time(env);
-	while (!env->end_cycle && get_time(env) - start < env->time_to_think)
+	start_time = get_time(env);
+	while (!env->end_cycle && get_time(env) - start_time < env->time_to_think)
 		usleep(200);
 }

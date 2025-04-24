@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:22:33 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/24 01:23:56 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/24 14:38:25 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ struct s_env
 	bool			end_cycle;
 	pthread_mutex_t	freeze_to_print;
 	pthread_mutex_t	freeze_env;
+	pthread_mutex_t	monitor_mtx;
 	t_fork			*forks;
 	t_philo			*philos;
 	pthread_t		monitor;
-	pthread_mutex_t	monitor_mtx;
 };
 
 /*-----PARSER-----*/

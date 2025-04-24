@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:49:56 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/23 22:09:05 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/23 23:03:22 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,16 @@ static void	*routine(void *arg)
 		{
 			handle_single_philo(philo);
 			return (NULL);
-			// printf("%ld philo %d has taken a fork\n", get_time(philo->environment), philo->id);
-			// usleep(philo->environment->time_to_die * 1000);
-			// break ;
 		}
+		if (philo->environment->philo_amount > 1)
+		{
+			take_forks(philo);
+			eating(philo);
+			drop_forks(philo);
+			sleeping(philo);
+			thinking(philo);
+		}
+
 	}
 	return (NULL);
 }

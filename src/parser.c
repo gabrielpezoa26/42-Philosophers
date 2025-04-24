@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:52:26 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/23 21:06:18 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/24 00:00:45 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	init_environment(char **argv, t_env *env)
 	env->time_to_die = ft_atoi(argv[2]);
 	env->time_to_eat = ft_atoi(argv[3]);
 	env->time_to_sleep = ft_atoi(argv[4]);
-	env->time_to_think = (env->time_to_eat + env->time_to_sleep) / 2;
+	env->time_to_think = time_to_think(env);
 	env->times_must_eat = -1;
 	if (argv[5])
 		env->times_must_eat = ft_atoi(argv[5]);
@@ -50,22 +50,45 @@ static void	init_forks(t_env *env)
 	}
 }
 
+// static void	init_philos(t_env *env)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	env->philos = malloc(sizeof(t_philo) * env->philo_amount);
+// 	if (!env->philos)
+// 		write(1, "Malloc fail", 11);
+// 	while (i < (env->philo_amount))
+// 	{
+// 		env->philos[i].id = i + 1;
+// 		env->philos[i].meals_count = 0;
+// 		env->philos[i].is_full = false;
+// 		env->philos[i].last_meal_time = env->start_time;
+// 		env->philos[i].r_fork = assign_forks(env, 'r');
+// 		env->philos[i].l_fork = assign_forks(env, 'l');
+// 		env->philos[i].environment = env;
+// 		i++;
+// 	}
+// }
+
 static void	init_philos(t_env *env)
 {
 	int	i;
+	int	amount;
 
 	i = 0;
-	env->philos = malloc(sizeof(t_philo) * env->philo_amount);
+	amount = env->philo_amount;
+	env->philos = malloc(sizeof(t_philo) * amount);
 	if (!env->philos)
 		write(1, "Malloc fail", 11);
-	while (i < (env->philo_amount))
+	while (i < amount)
 	{
 		env->philos[i].id = i + 1;
 		env->philos[i].meals_count = 0;
 		env->philos[i].is_full = false;
 		env->philos[i].last_meal_time = env->start_time;
-		env->philos[i].r_fork = assign_forks(env, 'r');
-		env->philos[i].l_fork = assign_forks(env, 'l');
+		env->philos[i].r_fork = &env->forks[i];
+		env->philos[i].l_fork = &env->forks[(i + 1) % amount];
 		env->philos[i].environment = env;
 		i++;
 	}

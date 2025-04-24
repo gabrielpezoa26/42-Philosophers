@@ -6,23 +6,11 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:46:28 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/23 21:59:07 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/23 23:59:29 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
-
-t_fork	*assign_forks(t_env *env, char side)
-{
-	int	id;
-
-	id = 0;
-	if (side == 'r')
-		id = env->philos->id;
-	if (side == 'l')
-		id = env->philos->id % env->philo_amount;
-	return (&env->forks[id]);
-}
 
 static int	ft_isdigit(int c)
 {
@@ -69,4 +57,16 @@ int	is_valid_number(char *arg)
 		i++;
 	}
 	return (1);
+}
+
+int	time_to_think(t_env *env)
+{
+	int	think;
+
+	think = env->time_to_die - (env->time_to_eat + env->time_to_sleep);
+	if (think < 0)
+		think = 0;
+	else if (think > 5)
+		think = 5;
+	return (think);
 }

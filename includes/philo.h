@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:22:33 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/23 22:08:51 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/23 23:58:58 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,13 @@ bool	validate_input(int argc, char **argv);
 void	init_all(char **argv, t_env *env);
 
 /*-----ACTIONS-----*/
-void	eating(void);
-void	sleeping(void);
-void	thinking(void);
+void	take_forks(t_philo *philo);
+void	drop_forks(t_philo *philo);
+
+void	eating(t_philo *philo);
+void	sleeping(t_philo *philo);
+void	thinking(t_philo *philo);
+
 
 /*-----THREADS-----*/
 void	start_cycle(t_env *env);
@@ -82,12 +86,9 @@ long	get_absolute_time(void);
 long	get_time(t_env *env);
 
 /*-----UTILS_PARSER-----*/
-t_fork	*assign_forks(t_env *env, char side);
 int		ft_atoi(char *str);
 int		is_valid_number(char *arg);
-
-/*-----PRINT_MSG-----*/
-void	print_message(char *msg);  //n ta sendo usada e cpa nem vai
+int		time_to_think(t_env *env);
 
 /*-----CLEAN-----*/
 void	free_structs(t_env *env);

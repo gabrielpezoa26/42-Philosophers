@@ -6,10 +6,9 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:49:56 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/23 23:52:09 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/24 00:22:02 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../includes/philo.h"
 
@@ -29,29 +28,43 @@ static void	log_fork(t_env *e, int id)
 	pthread_mutex_unlock(&e->freeze_to_print);
 }
 
-void	take_forks(t_philo *p)
+static int	lock_fork(t_env *env, pthread_mutex_t *fork)
 {
-	t_env	*e;
-
-	e = p->environment;
-	if (p->id % 2 == 0)
+	pthread_mutex_lock(fork);
+	if (env->end_cycle)
 	{
-		pthread_mutex_lock(&p->r_fork->fork);
-		if (e->end_cycle) { pthread_mutex_unlock(&p->r_fork->fork); return ; }
-		log_fork(e, p->id);
-		pthread_mutex_lock(&p->l_fork->fork);
-		if (e->end_cycle) { drop_forks(p); return ; }
-		log_fork(e, p->id);
+		pthread_mutex_unlock(fork);
+		return (0);
+	}
+	return (1);
+}
+
+void	take_forks(t_philo *philo)
+{
+	t_env			*env;
+	pthread_mutex_t	*first;
+	pthread_mutex_t	*second;
+
+	env = philo->environment;
+	if (philo->id % 2 == 0)
+	{
+		first = &philo->r_fork->fork;
+		second = &philo->l_fork->fork;
 	}
 	else
 	{
-		pthread_mutex_lock(&p->l_fork->fork);
-		if (e->end_cycle) { pthread_mutex_unlock(&p->l_fork->fork); return ; }
-		log_fork(e, p->id);
-		pthread_mutex_lock(&p->r_fork->fork);
-		if (e->end_cycle) { drop_forks(p); return ; }
-		log_fork(e, p->id);
+		first = &philo->l_fork->fork;
+		second = &philo->r_fork->fork;
 	}
+	if (!lock_fork(env, first))
+		return ;
+	log_fork(env, philo->id);
+	if (!lock_fork(env, second))
+	{
+		pthread_mutex_unlock(first);
+		return ;
+	}
+	log_fork(env, philo->id);
 }
 
 void	drop_forks(t_philo *p)
@@ -60,7 +73,6 @@ void	drop_forks(t_philo *p)
 	pthread_mutex_unlock(&p->r_fork->fork);
 }
 
-/* ------------------------------ actions -------------------------------- */
 void	eating(t_philo *p)
 {
 	t_env	*e;
@@ -69,8 +81,12 @@ void	eating(t_philo *p)
 	e = p->environment;
 	pthread_mutex_lock(&e->freeze_env);
 	p->last_meal_time = get_absolute_time();
+	p->meals_count++;
+	if (e->times_must_eat > 0 && p->meals_count >= e->times_must_eat)
+		p->is_full = true;
 	pthread_mutex_unlock(&e->freeze_env);
-	if (e->end_cycle) return ;
+	if (e->end_cycle)
+		return ;
 	log_state(e, p->id, "is eating");
 	start = get_time(e);
 	while (!e->end_cycle && get_time(e) - start < e->time_to_eat)
@@ -83,7 +99,8 @@ void	sleeping(t_philo *p)
 	long	start;
 
 	e = p->environment;
-	if (e->end_cycle) return ;
+	if (e->end_cycle)
+		return ;
 	log_state(e, p->id, "is sleeping");
 	start = get_time(e);
 	while (!e->end_cycle && get_time(e) - start < e->time_to_sleep)
@@ -96,7 +113,8 @@ void	thinking(t_philo *p)
 	long	start;
 
 	e = p->environment;
-	if (e->end_cycle) return ;
+	if (e->end_cycle)
+		return ;
 	log_state(e, p->id, "is thinking");
 	start = get_time(e);
 	while (!e->end_cycle && get_time(e) - start < e->time_to_think)

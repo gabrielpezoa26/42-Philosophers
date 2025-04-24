@@ -6,14 +6,12 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:46:28 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/23 23:49:25 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/24 00:23:28 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../includes/philo.h"
 
-/* ---------- single-philosopher edge-case (≤18 lines) -------------------- */
 void	handle_single_philo(t_philo *philo)
 {
 	t_env	*env;
@@ -30,13 +28,13 @@ void	handle_single_philo(t_philo *philo)
 	pthread_mutex_unlock(&philo->l_fork->fork);
 }
 
-/* ------------------- death detection (exact, ≤25 lines) ------------------ */
 bool	is_philo_dead(t_env *env)
 {
-	int		i = 0;
+	int		i;
 	long	now_ms;
 	long	last_ms;
 
+	i = 0;
 	while (i < env->philo_amount)
 	{
 		now_ms = get_absolute_time();
@@ -58,12 +56,12 @@ bool	is_philo_dead(t_env *env)
 	return (false);
 }
 
-/* -------------------- check if everyone is full ------------------------- */
 bool	is_philos_full(t_env *env)
 {
-	int	i = 0;
+	int	i;
 	int	meals;
 
+	i = 0;
 	if (env->times_must_eat < 0)
 		return (false);
 	while (i < env->philo_amount)
@@ -78,7 +76,6 @@ bool	is_philos_full(t_env *env)
 	return (true);
 }
 
-/* --------------------- timing utilities (unchanged) --------------------- */
 long	get_absolute_time(void)
 {
 	struct timeval	tv;

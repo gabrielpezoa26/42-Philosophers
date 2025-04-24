@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:49:56 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/23 23:03:22 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/24 00:22:50 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,12 @@ static void	*monitor_routine(void *arg)
 		if (is_philo_dead(env))
 			break ;
 		if (is_philos_full(env))
+		{
+			pthread_mutex_lock(&env->monitor_mtx);
+			env->end_cycle = true;
+			pthread_mutex_unlock(&env->monitor_mtx);
 			break ;
+		}
 		usleep(200);
 	}
 	return (NULL);
@@ -48,35 +53,9 @@ static void	*routine(void *arg)
 			sleeping(philo);
 			thinking(philo);
 		}
-
 	}
 	return (NULL);
 }
-
-// static void	*routine(void *arg)
-// {
-// 	t_philo	*philo;
-// 	t_env	*env;
-
-// 	philo = (t_philo *)arg;
-// 	env = philo->environment;
-// 	if (env->philo_amount == 1)
-// 	{
-// 		handle_single_philo(philo);
-// 		return (NULL);
-// 	}
-// 	if (philo->id % 2 == 0)
-// 		usleep(200);
-// 	while (!env->end_cycle && !philo->is_full)
-// 	{
-// 		take_forks(philo);
-// 		eating(philo);
-// 		drop_forks(philo);
-// 		sleeping(philo);
-// 		thinking(philo);
-// 	}
-// 	return (NULL);
-// }
 
 void	start_cycle(t_env *env)
 {

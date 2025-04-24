@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:49:56 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/24 00:22:50 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/24 00:38:52 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	start_cycle(t_env *env)
 			&env->philos[i]);
 		i++;
 	}
-	pthread_join(env->monitor, NULL); // unitialised
+	pthread_join(env->monitor, NULL);
 	i = 0;
 	while (i < (env->philo_amount))
 	{

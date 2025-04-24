@@ -6,13 +6,13 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:49:56 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/24 00:22:02 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/24 00:44:49 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
-static void	log_state(t_env *e, int id, char *msg)
+static void	print_state_msg(t_env *e, int id, char *msg)
 {
 	pthread_mutex_lock(&e->freeze_to_print);
 	if (!e->end_cycle)
@@ -87,7 +87,7 @@ void	eating(t_philo *p)
 	pthread_mutex_unlock(&e->freeze_env);
 	if (e->end_cycle)
 		return ;
-	log_state(e, p->id, "is eating");
+	print_state_msg(e, p->id, "is eating");
 	start = get_time(e);
 	while (!e->end_cycle && get_time(e) - start < e->time_to_eat)
 		usleep(200);
@@ -101,7 +101,7 @@ void	sleeping(t_philo *p)
 	e = p->environment;
 	if (e->end_cycle)
 		return ;
-	log_state(e, p->id, "is sleeping");
+	print_state_msg(e, p->id, "is sleeping");
 	start = get_time(e);
 	while (!e->end_cycle && get_time(e) - start < e->time_to_sleep)
 		usleep(200);
@@ -115,7 +115,7 @@ void	thinking(t_philo *p)
 	e = p->environment;
 	if (e->end_cycle)
 		return ;
-	log_state(e, p->id, "is thinking");
+	print_state_msg(e, p->id, "is thinking");
 	start = get_time(e);
 	while (!e->end_cycle && get_time(e) - start < e->time_to_think)
 		usleep(200);

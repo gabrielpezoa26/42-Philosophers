@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:22:33 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/23 20:18:57 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/23 22:08:51 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ struct s_env
 {
 	int				philo_amount;
 	int				number_philos_full;
-	int			time_to_die;
-	int			time_to_eat;
-	int			time_to_sleep;
-	int			time_to_think;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				time_to_think;
 	int				times_must_eat;
 	int				meals_count;
 	long			start_time;
@@ -75,7 +75,7 @@ void	thinking(void);
 void	start_cycle(t_env *env);
 
 /*-----UTILS_THREADS-----*/
-// void	ft_sleep(long time, t_env *t_env);
+void	handle_single_philo(t_philo *philo);
 bool	is_philo_dead(t_env *env);
 bool	is_philos_full(t_env *env);
 long	get_absolute_time(void);

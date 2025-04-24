@@ -7,14 +7,14 @@ CFLAGS = -Wall -Werror -Wextra -pthread
 # source files
 SRCS = 	src/main.c src/utils_parser.c src/parser.c \
 			src/threads.c src/clean.c src/actions \
-			src/utils_threads.c # src/print_message.c \
+			src/utils_threads.c \
 # object directory
 OBJ_DIR = objects
 
 # object files
 OBJS = $(OBJ_DIR)/main.o $(OBJ_DIR)/parser.o $(OBJ_DIR)/utils_parser.o \
 		$(OBJ_DIR)/clean.o $(OBJ_DIR)/threads.o $(OBJ_DIR)/actions.o  \
-		$(OBJ_DIR)/utils_threads.o # $(OBJ_DIR)/print_message.o\
+		$(OBJ_DIR)/utils_threads.o \
 
 
 all : $(NAME)
@@ -43,9 +43,6 @@ $(OBJ_DIR)/utils_threads.o: src/utils_threads.c | $(OBJ_DIR)
 
 $(OBJ_DIR)/actions.o: src/actions.c | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c src/actions.c -o $(OBJ_DIR)/actions.o
-
-# $(OBJ_DIR)/print_message.o: src/print_message.c | $(OBJ_DIR)
-# 	$(CC) $(CFLAGS) -c src/print_message.c -o $(OBJ_DIR)/print_message.o
 
 # object directory
 $(OBJ_DIR):

@@ -22,7 +22,7 @@ pthread_join(thread, NULL);=====================================================
 
 amanha:
 {
-	arrumar is_philo_dead()
+	handle_single_philo()
 }
 
 

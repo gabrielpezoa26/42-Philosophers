@@ -6,60 +6,55 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:46:28 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/23 20:14:04 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/23 22:12:07 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
 
+void	handle_single_philo(t_philo *philo)
+{
+	t_env	*env;
+	long	start;
+
+	env = philo->environment;
+	pthread_mutex_lock(&philo->l_fork->fork);
+	pthread_mutex_lock(&env->freeze_to_print);
+	printf("%ld %d has taken a fork\n", get_time(env), philo->id);
+	pthread_mutex_unlock(&env->freeze_to_print);
+	start = get_time(env);
+	while (!env->end_cycle && get_time(env) - start < env->time_to_die)
+		usleep(200);
+	pthread_mutex_unlock(&philo->l_fork->fork);
+}
+
 bool	is_philo_dead(t_env *env)
 {
-	int	i;
+	int		i;
+	long	now_ms;
+	long	last_ms;
 
 	i = 0;
+	now_ms = get_absolute_time();
 	while (i < env->philo_amount)
 	{
 		pthread_mutex_lock(&env->freeze_env);
-		if (get_time(env) - env->philos[i].last_meal_time > env->time_to_die)
+		last_ms = env->philos[i].last_meal_time;
+		pthread_mutex_unlock(&env->freeze_env);
+		if (now_ms - last_ms >= env->time_to_die)
 		{
-			pthread_mutex_lock(&env->freeze_env);
-			// printf("%ld philo %i died\n", get_time(env), i + 1);
-			// env->end_cycle = true;
+			pthread_mutex_lock(&env->freeze_to_print);
+			printf("%ld %d died\n", get_time(env), env->philos[i].id);
 			pthread_mutex_unlock(&env->freeze_to_print);
-			pthread_mutex_unlock(&env->freeze_env);
+			pthread_mutex_lock(&env->monitor_mtx);
+			env->end_cycle = true;
+			pthread_mutex_unlock(&env->monitor_mtx);
 			return (true);
 		}
-		pthread_mutex_unlock(&env->freeze_env);
 		i++;
 	}
 	return (false);
 }
-
-// bool	is_philo_dead(t_env *env)
-// {
-// 	int		i;
-// 	long	current_time;
-// 	long	time_since_last_meal;
-
-// 	i = 0;
-// 	while (i < env->philo_amount)
-// 	{
-// 		current_time = get_absolute_time();
-// 		time_since_last_meal = current_time - env->philos[i].last_meal_time;
-// 		if (time_since_last_meal > env->time_to_die)
-// 		{
-// 			pthread_mutex_lock(&env->freeze_to_print);
-// 			printf("%ld philo %d died\n", get_time(env), env->philos[i].id);
-// 			pthread_mutex_unlock(&env->freeze_to_print);
-// 			pthread_mutex_lock(&env->monitor_mtx);
-// 			env->end_cycle = true;
-// 			pthread_mutex_unlock(&env->monitor_mtx);
-// 			return (true);
-// 		}
-// 		i++;
-// 	}
-// 	return (false);
-// }
 
 bool	is_philos_full(t_env *env)
 {

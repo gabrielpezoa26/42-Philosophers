@@ -6,25 +6,11 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:46:28 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/23 18:59:02 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/23 21:59:07 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/philo.h"
-
-// void	assign_forks(t_philo *philo)
-// {
-// 	if (philo->id % 2 == 0)
-// 	{
-// 		pthread_mutex_lock(&philo->r_fork->fork);
-// 		pthread_mutex_lock(&philo->l_fork->fork);
-// 	}
-// 	else
-// 	{
-// 		pthread_mutex_lock(&philo->l_fork->fork);
-// 		pthread_mutex_lock(&philo->r_fork->fork);
-// 	}
-// }
 
 t_fork	*assign_forks(t_env *env, char side)
 {

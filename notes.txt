@@ -1,7 +1,5 @@
 amanha:
 {
 	trocar src/ para philo/
-	verificar edge cases
 	git rm --cached notes.txt
-	cores**
 }

@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:52:26 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/24 21:45:25 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/24 22:02:12 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	init_forks(t_env *env)
 	i = 0;
 	env->forks = malloc(sizeof(t_fork) * env->philo_amount);
 	if (!env->forks)
-		write(1, "Malloc fail", 11);
+		printf("Malloc fail\n");
 	while (i < (env->philo_amount))
 	{
 		pthread_mutex_init(&env->forks[i].fork, NULL);
@@ -54,7 +54,7 @@ static void	init_philos(t_env *env)
 	philo_count = env->philo_amount;
 	env->philos = malloc(sizeof(t_philo) * philo_count);
 	if (!env->philos)
-		write(1, "Malloc fail", 11);
+		printf("Malloc fail\n");
 	while (i < philo_count)
 	{
 		env->philos[i].id = i + 1;

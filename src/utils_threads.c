@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:46:28 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/24 21:33:21 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/24 23:09:21 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	handle_single_philo(t_philo *philo)
 	printf("%ld %d has taken a fork\n", get_time(env), philo->id);
 	pthread_mutex_unlock(&env->freeze_to_print);
 	start = get_time(env);
-	while (!sim_stopped(env) && get_time(env) - start < env->time_to_die)
+	while (sim_running(env) && get_time(env) - start < env->time_to_die)
 		usleep(200);
 	pthread_mutex_unlock(&philo->l_fork->fork);
 }

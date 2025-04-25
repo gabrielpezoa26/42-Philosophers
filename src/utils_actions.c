@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 00:57:46 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/24 21:35:01 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/24 23:09:21 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	print_message(t_env *env, int id, char *msg)
 {
 	pthread_mutex_lock(&env->freeze_to_print);
-	if (!sim_stopped(env))
+	if (sim_running(env))
 		printf("%ld %d %s\n", get_time(env), id, msg);
 	pthread_mutex_unlock(&env->freeze_to_print);
 }
@@ -23,7 +23,7 @@ void	print_message(t_env *env, int id, char *msg)
 static int	lock_fork(t_env *env, pthread_mutex_t *fork)
 {
 	pthread_mutex_lock(fork);
-	if (sim_stopped(env))
+	if (!sim_running(env))
 	{
 		pthread_mutex_unlock(fork);
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:22:33 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/24 16:53:58 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/24 21:47:28 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,13 @@ int		time_to_think(t_env *env);
 
 /*-----UTILS_ACTIONS-----*/
 void	print_message(t_env *env, int id, char *msg);
-void	take_forks(t_philo *philo);
+int		take_forks(t_philo *philo);
 void	drop_forks(t_philo *philo);
+bool	sim_running(t_env *env);
+bool	sim_stopped(t_env *env);
 
 /*-----CLEAN-----*/
 void	free_structs(t_env *env);
+
 
 #endif

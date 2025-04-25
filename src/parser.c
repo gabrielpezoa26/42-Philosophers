@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:52:26 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/24 20:31:05 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/24 21:45:25 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,6 @@ static void	init_environment(char **argv, t_env *env)
 	pthread_mutex_init(&env->freeze_env, NULL);
 	pthread_mutex_init(&env->freeze_to_print, NULL);
 	pthread_mutex_init(&env->monitor_mtx, NULL);
-	printf("DEBUG: parsed Values: philo_amount: %d, time_to_die: %d, "
-		"time_to_eat: %d, time_to_sleep: %d, time_to_think: %d\n", env->philo_amount, env->time_to_die, env->time_to_eat, env->time_to_sleep, env->time_to_think);
-	if (argv[5])
-		printf("DEBUG:  times_must_eat: %d\n", env->times_must_eat);
 }
 
 static void	init_forks(t_env *env)

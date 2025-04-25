@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:22:33 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/25 01:01:25 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/25 16:17:42 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,11 @@ typedef struct s_philo
 struct s_env
 {
 	int				philo_amount;
-	// int				number_philos_full;
 	int				time_to_die;
 	int				time_to_eat;
 	int				time_to_sleep;
 	int				time_to_think;
 	int				times_must_eat;
-	// int				meals_count;
 	long			start_time;
 	bool			end_cycle;
 	pthread_mutex_t	freeze_to_print;

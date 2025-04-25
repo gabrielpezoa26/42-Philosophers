@@ -1,5 +1,0 @@
-amanha:
-{
-	git rm --cached notes.txt
-	git rm --cached .vscode/
-}

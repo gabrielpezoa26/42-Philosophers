@@ -1,5 +1,5 @@
 amanha:
 {
-	trocar src/ para philo/
 	git rm --cached notes.txt
+	git rm --cached .vscode/
 }

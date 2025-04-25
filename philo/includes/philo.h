@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 14:22:33 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/24 23:15:05 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/25 01:01:25 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ long	get_time(t_env *env);
 /*-----UTILS_PARSER-----*/
 int		ft_atoi(char *str);
 int		is_valid_number(char *arg);
-int		time_to_think(t_env *env);
+int		get_time_to_think(t_env *env);
 
 /*-----UTILS_ACTIONS-----*/
 void	print_message(t_env *env, int id, char *msg);

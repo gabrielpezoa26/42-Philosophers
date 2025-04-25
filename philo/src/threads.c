@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:49:56 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/24 23:09:21 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/25 13:17:21 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,27 @@ static void	*monitor_routine(void *arg)
 	return (NULL);
 }
 
+// static void	*routine(void *arg)
+// {
+// 	t_philo	*philo;
+// 	t_env	*env;
+
+// 	philo = (t_philo *)arg;
+// 	env = philo->environment;
+// 	while (sim_running(env))
+// 	{
+// 		if (env->philo_amount == 1)
+// 			return (handle_single_philo(philo), NULL);
+// 		if (!take_forks(philo))
+// 			continue ;
+// 		eating(philo);
+// 		drop_forks(philo);
+// 		sleeping(philo);
+// 		thinking(philo);
+// 	}
+// 	return (NULL);
+// }
+
 static void	*routine(void *arg)
 {
 	t_philo	*philo;
@@ -43,13 +64,20 @@ static void	*routine(void *arg)
 	while (sim_running(env))
 	{
 		if (env->philo_amount == 1)
-			return (handle_single_philo(philo), NULL);
-		if (!take_forks(philo))
-			continue ;
-		eating(philo);
-		drop_forks(philo);
-		sleeping(philo);
-		thinking(philo);
+		{
+			handle_single_philo(philo);
+			return (NULL);
+		}
+		if (sim_running(env))
+		{
+			if (take_forks(philo))
+			{
+				eating(philo);
+				drop_forks(philo);
+				sleeping(philo);
+				thinking(philo);
+			}
+		}
 	}
 	return (NULL);
 }

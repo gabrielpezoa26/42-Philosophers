@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:46:28 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/24 20:31:14 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/25 01:01:25 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	is_valid_number(char *arg)
 	return (1);
 }
 
-int	time_to_think(t_env *env)
+int	get_time_to_think(t_env *env)
 {
 	int	think;
 

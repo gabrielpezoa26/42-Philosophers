@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:52:26 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/24 22:02:12 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/04/25 01:01:25 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	init_environment(char **argv, t_env *env)
 	env->time_to_die = ft_atoi(argv[2]);
 	env->time_to_eat = ft_atoi(argv[3]);
 	env->time_to_sleep = ft_atoi(argv[4]);
-	env->time_to_think = time_to_think(env);
+	env->time_to_think = get_time_to_think(env);
 	env->times_must_eat = -1;
 	if (argv[5])
 		env->times_must_eat = ft_atoi(argv[5]);

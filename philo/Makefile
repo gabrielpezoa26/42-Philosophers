@@ -6,8 +6,8 @@ CFLAGS = -Wall -Werror -Wextra -pthread
 
 # source files
 SRCS = 	src/main.c src/utils_parser.c src/parser.c \
-			src/threads.c src/clean.c src/actions \
-			src/utils_threads.c src/utils_actions \
+			src/threads.c src/clean.c src/actions.c \
+			src/utils_threads.c src/utils_actions.c \
 # object directory
 OBJ_DIR = objects
 

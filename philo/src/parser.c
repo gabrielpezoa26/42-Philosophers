@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gabriel <gabriel@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:52:26 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/25 01:01:25 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2025/07/03 11:27:55 by gabriel          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ static void	init_philos(t_env *env)
 		i++;
 	}
 }
+/*
 
+*/
 void	init_all(char **argv, t_env *env)
 {
 	if (!env)

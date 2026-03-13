@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 16:49:56 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/24 23:09:21 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2026/03/13 09:13:09 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	eating(t_philo *philo)
 	pthread_mutex_unlock(&env->freeze_env);
 	if (!sim_running(env))
 		return ;
-	print_message(env, philo->id, "is eating");
+	print_message(env, philo->id, "\033[0;32mis eating\033[0m");
 	start_time = get_time(env);
 	while (sim_running(env) && get_time(env) - start_time < env->time_to_eat)
 		usleep(200);
@@ -40,7 +40,7 @@ void	sleeping(t_philo *philo)
 	env = philo->environment;
 	if (!sim_running(env))
 		return ;
-	print_message(env, philo->id, "is sleeping");
+	print_message(env, philo->id, "\033[0;34mis sleeping\033[0m");
 	start_time = get_time(env);
 	while (sim_running(env) && get_time(env) - start_time < env->time_to_sleep)
 		usleep(200);
@@ -54,7 +54,7 @@ void	thinking(t_philo *philo)
 	env = philo->environment;
 	if (!sim_running(env))
 		return ;
-	print_message(env, philo->id, "is thinking");
+	print_message(env, philo->id, "\033[0;33mis thinking\033[0m");
 	start_time = get_time(env);
 	while (sim_running(env) && get_time(env) - start_time < env->time_to_think)
 		usleep(200);

@@ -6,7 +6,7 @@
 /*   By: gcesar-n <gcesar-n@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 12:46:28 by gcesar-n          #+#    #+#             */
-/*   Updated: 2025/04/24 23:09:21 by gcesar-n         ###   ########.fr       */
+/*   Updated: 2026/03/13 09:14:54 by gcesar-n         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ bool	is_philo_dead(t_env *env)
 		if (now_ms - last_ms >= env->time_to_die)
 		{
 			pthread_mutex_lock(&env->freeze_to_print);
-			printf("%ld %d died\n", get_time(env), env->philos[i].id);
+			printf("\033[0;31m%ld %d died\033[0m\n", get_time(env), env->philos[i].id);
 			pthread_mutex_unlock(&env->freeze_to_print);
 			pthread_mutex_lock(&env->monitor_mtx);
 			env->end_cycle = true;
